@@ -88,9 +88,9 @@ router.get("/", async (req, res) => {
     } else {
       posts = await Post.find();
     }
-    res.status(200).json(posts);
+    return res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
