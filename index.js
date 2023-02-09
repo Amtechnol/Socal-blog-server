@@ -49,7 +49,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     .json({ message: "File has been uploaded", filename: req.file.filename });
 });
 
-app.use("/", function (req, res) {
+app.get("/", function (req, res) {
   return res.send("Success");
 });
 
