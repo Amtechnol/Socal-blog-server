@@ -78,16 +78,22 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username });
+      posts = await Post.find({ username }).lean();
     } else if (catName) {
       posts = await Post.find({
         categories: {
           $in: [catName],
         },
-      });
+      }).lean();
     } else {
       posts = await Post.find();
     }
+    posts.map((data) => {
+      data.photo = data.photo
+        ? `https://murli-server.up.railway.app/images/${data.photo}`
+        : `https://murli-server.up.railway.app/images/dummy.png`;
+    });
+
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
