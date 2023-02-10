@@ -44,6 +44,7 @@ const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   console.log("req.file", req.file);
   console.log("req.files", req.files);
+  upload.profilePic = `https://murli-server.up.railway.app/images/${upload.profilePic}`;
   res
     .status(200)
     .json({ message: "File has been uploaded", filename: req.file.filename });
