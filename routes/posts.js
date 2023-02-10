@@ -89,9 +89,7 @@ router.get("/", async (req, res) => {
       posts = await Post.find();
     }
     posts.map((data) => {
-      data.photo = data.photo
-        ? `https://murli-server.up.railway.app/images/${data.photo}`
-        : `https://murli-server.up.railway.app/images/dummy.png`;
+      data.photo = `https://murli-server.up.railway.app/images/${data.photo}`;
     });
 
     res.status(200).json(posts);
