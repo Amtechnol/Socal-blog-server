@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
     // const user = await newUser.save();
     // const user = await newUser.save();
 
-    newUser.profilePic = `https://murli-server.up.railway.app/images/${newUser.profilePic}`;
+    newUser.profilePic = `${process.env.BASE_URL}/images/${newUser.profilePic}`;
     delete newUser.password;
 
     console.log("newuser", newUser);
@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
 
     const validated = await bcrypt.compare(req.body.password, user.password);
     !validated && res.status(400).json("Wrong credentials!");
-    user.profilePic = `https://murli-server.up.railway.app/images/${user.profilePic}`;
+    user.profilePic = `${process.env.BASE_URL}/images/${user.profilePic}`;
     delete user.password;
     res.status(200).json(user);
   } catch (err) {

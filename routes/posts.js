@@ -64,7 +64,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).lean();
-    post.photo = `https://murli-server.up.railway.app/images/${post.photo}`;
+    post.photo = `${process.env.BASE_URL}/images/${post.photo}`;
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
@@ -90,7 +90,7 @@ router.get("/", async (req, res) => {
       posts = await Post.find();
     }
     posts.map((data) => {
-      data.photo = `https://murli-server.up.railway.app/images/${data.photo}`;
+      data.photo = `${process.env.BASE_URL}/images/${data.photo}`;
     });
 
     res.status(200).json(posts);
