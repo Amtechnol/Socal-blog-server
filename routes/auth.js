@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
     // console.log("user", newUser);
 
     // const user = await newUser.save();
+    // const user = await newUser.save();
 
     newUser.profilePic = `https://murli-server.up.railway.app/images/${newUser.profilePic}`;
     delete newUser.password;
