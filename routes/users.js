@@ -18,6 +18,8 @@ router.put("/:id", async (req, res) => {
         },
         { new: true }
       );
+      updatedUser.profilePic = `${process.env.BASE_URL}/images/${updatedUser.profilePic}`;
+
       res.status(200).json(updatedUser);
     } catch (err) {
       res.status(500).json(err);
