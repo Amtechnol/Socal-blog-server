@@ -5,18 +5,12 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      index: true,
+      unique: true,
     },
     email: {
       type: String,
       required: true,
-      index: {
-        unique: true,
-      },
-      validate: {
-        validator: isEmailExists,
-        msg: "Email already exists",
-      },
+      unique: true,
     },
     password: {
       type: String,
@@ -29,19 +23,5 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-function isEmailExists(email, callback) {
-  if (email) {
-    mongoose.models["users"].count(
-      { _id: { $ne: this._id }, email: email },
-      function (err, result) {
-        if (err) {
-          return callback(err);
-        }
-        callback(!result);
-      }
-    );
-  }
-}
 
 module.exports = mongoose.model("User", UserSchema);
